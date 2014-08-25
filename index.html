@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>LaCon 2k14 Call For Pulpos</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/jquery.mousewheel-min.js"></script>
+    <script src="js/jquery.terminal-min.js"></script>
+    <script src="js/commands.js"></script>
+    <script src="js/alice.js"></script>
+    <link href="css/jquery.terminal.css" rel="stylesheet"/>
+    <script>
+    var terminal = null;
+    $(document).ready(function($) {
+        $('body').terminal(function(command, term){
+         var cmd  = $.terminal.parseCommand(command);
+         window.terminal = term;
+         switch(cmd.name){
+            case 'help'      :  help();break;
+            case 'clear'     :  term.clear();break;
+            case 'when'      :  when();break;
+            case 'where'     :  where();break;
+            case 'who'       :  who();break;
+            case 'deadline'  :  deadline();break;
+            case 'topics'    :  topics();break;
+            case 'submit'    :  submit();break;
+            case 'r2':
+            case 'radare'    :  radare();break;
+            case 'challenge' :  alice(cmd.args);break;
+            case 'gpgkey'    :  gpgkey();break;
+            case '': break;
+            default: term.echo(command+': command not found');
+          }
+        }, {
+            login: false,
+            greetings: [
+                " _           _____               _____  _     __    ___     ,---.",
+                "| |         /  __ \\             / __  \\| |   /  |  /   |   ( @ @ ) ",
+                "| |     __ _| /  \\/ ___  _ __   `' / /'| | __`| | / /| |    ).-.(",
+                "| |    / _` | |    / _ \\| '_ \\    / /  | |/ / | |/ /_| |   '/|||\\`",
+                "| |___| (_| | \\__/\\ (_) | | | | ./ /___|   < _| |\\___  |     '|` ",
+                "\\_____/\\__,_|\\____/\\___/|_| |_| \\_____/|_|\\_\\\\___/   |_/",
+                "\n",
+                "-= call for pulpos system =-\n"
+            ].join('\n'),
+            prompt: "$ ",
+            onBlur: function() {
+                return false;
+            },
+        });
+    });
+    </script>
+  </head>
+</html>
